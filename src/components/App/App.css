@@ -1,0 +1,10 @@
+.App {
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+
+@media (min-width: 1440px) {
+  .App {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
