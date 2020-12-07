@@ -6,6 +6,11 @@ function Header() {
   return (
     <header className="header">
       <Navigation />
+      <h2 class="header__title">What's going on in the world?</h2>
+      <p class="header__text">
+        Find the latest news on any topic and save them in your personal
+        account.
+      </p>
     </header>
   );
 }
