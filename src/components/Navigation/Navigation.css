@@ -9,7 +9,7 @@
 }
 
 .navigation_mode_light {
-  color: #000;
+  color: #1a1b22;
 }
 
 .navigation__title {
@@ -114,7 +114,7 @@
 }
 
 .navigation_mode_light .navigation__link_selected {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid #1a1b22;
 }
 
 .navigation__btn {
@@ -133,7 +133,7 @@
 }
 
 .navigation_mode_light .navigation__btn {
-  border: 1px solid #000;
+  border: 1px solid #1a1b22;
 }
 
 .navigation__btn:hover {
