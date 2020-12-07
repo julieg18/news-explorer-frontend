@@ -1,53 +1,53 @@
 @font-face {
-  src: url(./static/RobotoSlab-Thin.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-Thin.ttf);
   font-family: 'Roboto Slab';
   font-weight: 100;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-ExtraLight.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-ExtraLight.ttf);
   font-family: 'Roboto Slab';
   font-weight: 200;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-Light.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-Light.ttf);
   font-family: 'Roboto Slab';
   font-weight: 300;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-Regular.ttf);
+  src: url(../woff-fonts/robotoslab-regular.woff);
   font-family: 'Roboto Slab';
   font-weight: 400;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-Medium.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-Medium.ttf);
   font-family: 'Roboto Slab';
   font-weight: 500;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-SemiBold.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-SemiBold.ttf);
   font-family: 'Roboto Slab';
   font-weight: 600;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-Bold.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-Bold.ttf);
   font-family: 'Roboto Slab';
   font-weight: 700;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-ExtraBold.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-ExtraBold.ttf);
   font-family: 'Roboto Slab';
   font-weight: 800;
 }
 
 @font-face {
-  src: url(./static/RobotoSlab-Black.ttf);
+  src: url(../Roboto_Slab/static/RobotoSlab-Black.ttf);
   font-family: 'Roboto Slab';
   font-weight: 900;
 }
