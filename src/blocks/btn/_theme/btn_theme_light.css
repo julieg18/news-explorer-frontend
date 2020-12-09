@@ -1,0 +1,13 @@
+.btn_theme_light {
+  background-color: #fff;
+  color: #000;
+  box-shadow: none;
+}
+
+.btn_theme_light:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.btn_theme_light:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+}
