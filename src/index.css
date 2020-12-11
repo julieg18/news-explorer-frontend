@@ -1,5 +1,3 @@
 @import url(./fonts/styles/roboto.css);
 @import url(./fonts/styles/roboto-slab.css);
 @import url(./vendor/normalize.css);
-@import url(./blocks/overlay/overlay.css);
-@import url(./blocks/overlay/_visible/overlay_visible.css);

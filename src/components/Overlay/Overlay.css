@@ -17,3 +17,8 @@
 .overlay:hover {
   cursor: pointer;
 }
+
+.overlay_visible {
+  opacity: 1;
+  visibility: visible;
+}

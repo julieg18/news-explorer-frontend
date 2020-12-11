@@ -1,4 +1,5 @@
 import React from 'react';
+import Overlay from '../Overlay/Overlay';
 import './Navigation.css';
 
 function Navigation() {
@@ -6,7 +7,7 @@ function Navigation() {
     <nav className="navigation">
       <p className="navigation__title">News Explorer</p>
       <button className="navigation__mobile-btn navigation__mobile-btn_icon_menu"></button>
-      <div className="overlay">
+      <Overlay>
         <div className="navigation__dropdown">
           <div className="navigation__dropdown-nav-bar">
             <p className="navigation__title navigation__dropdown-title">
@@ -35,7 +36,7 @@ function Navigation() {
             </li>
           </ul>
         </div>
-      </div>
+      </Overlay>
       <ul className="navigation__items">
         <li className="navigation__item">
           <a
