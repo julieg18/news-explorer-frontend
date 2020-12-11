@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button/Button';
 import './SearchForm.css';
 
 function SearchForm() {
@@ -11,9 +12,9 @@ function SearchForm() {
         name="search-form"
         id="#search-form"
       />
-      <button className="btn search-form__btn" type="submit">
+      <Button additionalClasses="search-form__btn" type="submit">
         Search
-      </button>
+      </Button>
     </form>
   );
 }
