@@ -2,9 +2,9 @@ import React from 'react';
 import Overlay from '../Overlay/Overlay';
 import './Navigation.css';
 
-function Navigation() {
+function Navigation({ lightTheme }) {
   return (
-    <nav className="navigation">
+    <nav className={`navigation ${lightTheme && 'navigation_theme_light'}`}>
       <p className="navigation__title">News Explorer</p>
       <button className="navigation__mobile-btn navigation__mobile-btn_icon_menu"></button>
       <Overlay>

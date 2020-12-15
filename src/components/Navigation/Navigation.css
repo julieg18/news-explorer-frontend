@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.navigation_mode_light {
+.navigation_theme_light {
   color: #1a1b22;
 }
 
@@ -44,7 +44,7 @@
   background-image: url(../../images/menu-white.svg);
 }
 
-.navigation_mode_light .navigation__mobile-btn_icon_menu {
+.navigation_theme_light .navigation__mobile-btn_icon_menu {
   background-image: url(../../images/menu-black.svg);
 }
 
@@ -114,7 +114,7 @@
   border-bottom: 3px solid #fff;
 }
 
-.navigation_mode_light .navigation__link_selected {
+.navigation_theme_light .navigation__link_selected {
   border-bottom: 3px solid #1a1b22;
 }
 
@@ -133,7 +133,7 @@
   align-items: center;
 }
 
-.navigation_mode_light .navigation__btn {
+.navigation_theme_light .navigation__btn {
   border: 1px solid #1a1b22;
 }
 
@@ -150,7 +150,7 @@
   background-size: contain;
 }
 
-.navigation_mode_light .navigation__btn-icon {
+.navigation_theme_light .navigation__btn-icon {
   background-image: url(../../images/logout-black.svg);
 }
 
