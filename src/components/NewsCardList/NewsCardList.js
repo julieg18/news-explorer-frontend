@@ -1,6 +1,5 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import Button from '../Button/Button';
 import './NewsCardList.css';
 
 function NewsCardList() {
@@ -66,19 +65,13 @@ function NewsCardList() {
     },
   ];
   return (
-    <section className="news-card-list">
-      <h2 className="news-card-list__title">Search Results</h2>
-      <ul className="news-card-list__cards">
-        {cards.map((card) => (
-          <li key={card.id} className="news-card-list__card">
-            <NewsCard card={card} />
-          </li>
-        ))}
-      </ul>
-      <Button lightTheme additionalClasses="news-card-list__show-more-btn">
-        Show More
-      </Button>
-    </section>
+    <ul className="news-card-list">
+      {cards.map((card) => (
+        <li key={card.id} className="news-card-list__card">
+          <NewsCard card={card} />
+        </li>
+      ))}
+    </ul>
   );
 }
 
