@@ -10,6 +10,8 @@
 
 .navigation_theme_light {
   color: #1a1b22;
+  box-shadow: inset 0px -1px 0px #d1d2d6;
+  background: #fff;
 }
 
 .navigation__title {
