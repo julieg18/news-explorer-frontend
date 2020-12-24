@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Overlay from '../Overlay/Overlay';
 import './Navigation.css';
 
-function Navigation({ lightTheme }) {
+function Navigation({ lightTheme, isPopupOpen }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  function toggleDropDown() {
+    setIsDropdownOpen(!isDropdownOpen);
+  }
+
   return (
     <nav className={`navigation ${lightTheme && 'navigation_theme_light'}`}>
       <p className="navigation__title">News Explorer</p>
-      <button className="navigation__mobile-btn navigation__mobile-btn_icon_menu"></button>
-      <Overlay>
-        <div className="navigation__dropdown">
+      {!isPopupOpen ? (
+        <button
+          onClick={toggleDropDown}
+          className="navigation__mobile-btn navigation__mobile-btn_icon_menu"
+        ></button>
+      ) : (
+        ''
+      )}
+      <Overlay visible={isDropdownOpen}>
+        <div
+          className={`navigation__dropdown ${
+            isDropdownOpen && 'navigation__dropdown_show'
+          }`}
+        >
           <div className="navigation__dropdown-nav-bar">
-            <p className="navigation__title navigation__dropdown-title">
-              News Explorer
-            </p>
-            <button className="navigation__mobile-btn navigation__mobile-btn_icon_exit"></button>
+            <button
+              onClick={toggleDropDown}
+              className="navigation__mobile-btn navigation__mobile-btn_icon_exit"
+            ></button>
           </div>
           <ul className="navigation__dropdown-items">
             <li className="navigation__item">
