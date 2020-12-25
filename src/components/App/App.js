@@ -5,13 +5,16 @@ import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import Popup from '../Popup/Popup';
 import './App.css';
+import SignupPopup from '../SignupPopup/SignupPopup';
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [
     isRegistrationSuccessfulMessagePopupOpen,
     setIsRegistrationSuccessfulMessagePopupOpen,
-  ] = useState(true);
+  ] = useState(false);
+  const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(true);
+  const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
   const [cards, setCards] = useState([
     {
@@ -85,6 +88,24 @@ function App() {
     },
   ]);
 
+  function closeAllPopups() {
+    setIsRegistrationSuccessfulMessagePopupOpen(false);
+    setIsSignupPopupOpen(false);
+    setIsPopupOpen(false);
+  }
+
+  function openSignupPopup() {
+    closeAllPopups();
+    setIsPopupOpen(true);
+    setIsSignupPopupOpen(true);
+  }
+
+  function openSigninPopup() {
+    closeAllPopups();
+    setIsPopupOpen(true);
+    setIsSigninPopupOpen(true);
+  }
+
   return (
     <div className="App">
       <Header isPopupOpen={isPopupOpen} />
@@ -93,11 +114,17 @@ function App() {
       <Popup
         visible={isRegistrationSuccessfulMessagePopupOpen}
         headingText="Registration successfully completed!"
+        onClose={closeAllPopups}
       >
         <a className="popup__link" href="/signup">
           Sign up
         </a>
       </Popup>
+      <SignupPopup
+        onSignupLinkClick={openSignupPopup}
+        onClose={closeAllPopups}
+        visible={isSignupPopupOpen}
+      />
     </div>
   );
 }
