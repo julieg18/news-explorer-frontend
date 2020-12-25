@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Overlay from '../Overlay/Overlay';
 import './Navigation.css';
 
-function Navigation({ lightTheme, isPopupOpen }) {
+function Navigation({ lightTheme, isPopupOpen, onSigninLinkClick }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   function toggleDropDown() {
@@ -44,7 +44,9 @@ function Navigation({ lightTheme, isPopupOpen }) {
               </a>
             </li>
             <li className="navigation__item">
-              <button className="navigation__btn">Sign In</button>
+              <button onClick={onSigninLinkClick} className="navigation__btn">
+                Sign In
+              </button>
             </li>
             <li className="navigation__item navigation__item_hidden">
               <button className="navigation__btn">
@@ -69,7 +71,9 @@ function Navigation({ lightTheme, isPopupOpen }) {
           </a>
         </li>
         <li className="navigation__item">
-          <button className="navigation__btn">Sign In</button>
+          <button onClick={onSigninLinkClick} className="navigation__btn">
+            Sign In
+          </button>
         </li>
         <li className="navigation__item navigation__item_hidden">
           <button className="navigation__btn">

@@ -4,8 +4,9 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import Popup from '../Popup/Popup';
-import './App.css';
 import SignupPopup from '../SignupPopup/SignupPopup';
+import SigninPopup from '../SigninPopup/SigninPopup';
+import './App.css';
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -91,6 +92,7 @@ function App() {
   function closeAllPopups() {
     setIsRegistrationSuccessfulMessagePopupOpen(false);
     setIsSignupPopupOpen(false);
+    setIsSigninPopupOpen(false);
     setIsPopupOpen(false);
     window.removeEventListener('keyup', handleEscPopupClose);
   }
@@ -121,7 +123,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header isPopupOpen={isPopupOpen} />
+      <Header onSigninLinkClick={openSigninPopup} isPopupOpen={isPopupOpen} />
       <Main isUserLoggedIn={isUserLoggedIn} cards={cards} />
       <Footer />
       <Popup
@@ -133,8 +135,13 @@ function App() {
           Sign up
         </a>
       </Popup>
-      <SignupPopup
+      <SigninPopup
         onSignupLinkClick={openSignupPopup}
+        onClose={closeAllPopups}
+        visible={isSigninPopupOpen}
+      />
+      <SignupPopup
+        onSigninLinkClick={openSigninPopup}
         onClose={closeAllPopups}
         visible={isSignupPopupOpen}
       />
