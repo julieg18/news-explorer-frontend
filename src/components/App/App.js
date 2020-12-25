@@ -13,9 +13,9 @@ function App() {
     isRegistrationSuccessfulMessagePopupOpen,
     setIsRegistrationSuccessfulMessagePopupOpen,
   ] = useState(false);
-  const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(true);
+  const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [cards, setCards] = useState([
     {
       id: '765',
@@ -92,16 +92,29 @@ function App() {
     setIsRegistrationSuccessfulMessagePopupOpen(false);
     setIsSignupPopupOpen(false);
     setIsPopupOpen(false);
+    window.removeEventListener('keyup', handleEscPopupClose);
+  }
+
+  function handleEscPopupClose(e) {
+    if (e.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  function setEscPopupCloseEventListener() {
+    window.addEventListener('keyup', handleEscPopupClose);
   }
 
   function openSignupPopup() {
     closeAllPopups();
+    setEscPopupCloseEventListener();
     setIsPopupOpen(true);
     setIsSignupPopupOpen(true);
   }
 
   function openSigninPopup() {
     closeAllPopups();
+    setEscPopupCloseEventListener();
     setIsPopupOpen(true);
     setIsSigninPopupOpen(true);
   }

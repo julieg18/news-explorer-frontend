@@ -20,7 +20,7 @@ function Navigation({ lightTheme, isPopupOpen }) {
       ) : (
         ''
       )}
-      <Overlay visible={isDropdownOpen}>
+      <Overlay onClose={toggleDropDown} visible={isDropdownOpen}>
         <div
           className={`navigation__dropdown ${
             isDropdownOpen && 'navigation__dropdown_show'
