@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Overlay.css';
 
 function Overlay({ visible, children, onClose }) {
-  function toggleScrolling() {
+  useEffect(() => {
     document.body.style.overflow = visible ? 'hidden' : 'visible';
-  }
+  }, [visible]);
 
   function checkIfOverlayWasClicked(e) {
     if (e.target.classList.contains('overlay')) {
@@ -12,7 +12,6 @@ function Overlay({ visible, children, onClose }) {
     }
   }
 
-  toggleScrolling();
   return (
     <div
       onClick={checkIfOverlayWasClicked}
