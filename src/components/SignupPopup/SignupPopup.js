@@ -102,6 +102,7 @@ function SignupPopup({ visible, onClose }) {
           value={password}
           placeholder="Enter password"
           type="password"
+          autoComplete="on"
           className={`popup-form__field-input ${
             !isPasswordValid && 'popup-form__field-input_invalid'
           }`}
