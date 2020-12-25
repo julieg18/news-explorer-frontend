@@ -6,12 +6,12 @@ import './PopupWithForm.css';
 function PopupWithForm({
   visible,
   headingText,
+  submitBtnText,
   onSubmit,
   children,
   isLoading,
   isFormValid,
   onClose,
-  handleSigninLinkClick,
 }) {
   return (
     <Popup onClose={onClose} visible={visible} headingText={headingText}>
@@ -21,15 +21,9 @@ function PopupWithForm({
           disabled={!isFormValid}
           additionalClasses="popup-form__submit-btn"
         >
-          {isLoading ? 'Loading...' : 'Signup'}
+          {isLoading ? 'Loading...' : submitBtnText}
         </Button>
       </form>
-      <p className="popup__text">
-        Or{' '}
-        <span onClick={handleSigninLinkClick} className="popup__link">
-          Sign in
-        </span>
-      </p>
     </Popup>
   );
 }

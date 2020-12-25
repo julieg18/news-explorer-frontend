@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function SignupPopup({ visible, onClose }) {
+function SignupPopup({ visible, onClose, onSigninLinkClick }) {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailValidationMessage, setEmailValidationMessage] = useState('');
@@ -62,15 +62,21 @@ function SignupPopup({ visible, onClose }) {
     );
   }
 
+  function handleFormSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <PopupWithForm
       isFormValid={isFormValid}
       visible={visible}
       headingText="Sign up"
+      submitBtnText="Sign up"
       onClose={onClose}
+      onSubmit={handleFormSubmit}
     >
       <div className="popup-form__field">
-        <label htmlFor="email-field" className="popup-form__field-label">
+        <label htmlFor="signup-email-field" className="popup-form__field-label">
           Email
         </label>
         <input
@@ -81,20 +87,23 @@ function SignupPopup({ visible, onClose }) {
           className={`popup-form__field-input ${
             !isEmailValid && 'popup-form__field-input_invalid'
           }`}
-          id="email-field"
+          id="signup-email-field"
           required
         />
         <span
           className={`popup-form__field-error ${
             !isEmailValid && 'popup-form__field-error_active'
           }`}
-          id="email-field-error"
+          id="signup-email-field-error"
         >
           {emailValidationMessage}
         </span>
       </div>
       <div className="popup-form__field">
-        <label htmlFor="password-field" className="popup-form__field-label">
+        <label
+          htmlFor="signup-password-field"
+          className="popup-form__field-label"
+        >
           Password
         </label>
         <input
@@ -106,20 +115,23 @@ function SignupPopup({ visible, onClose }) {
           className={`popup-form__field-input ${
             !isPasswordValid && 'popup-form__field-input_invalid'
           }`}
-          id="password-field"
+          id="signup-password-field"
           required
         />
         <span
           className={`popup-form__field-error ${
             !isPasswordValid && 'popup-form__field-error_active'
           }`}
-          id="password-field-error"
+          id="signup-password-field-error"
         >
           {passwordValidationMessage}
         </span>
       </div>
       <div className="popup-form__field">
-        <label htmlFor="username-field" className="popup-form__field-label">
+        <label
+          htmlFor="signup-username-field"
+          className="popup-form__field-label"
+        >
           Username
         </label>
         <input
@@ -130,7 +142,7 @@ function SignupPopup({ visible, onClose }) {
           className={`popup-form__field-input ${
             !isUsernameValid && 'popup-form__field-input_invalid'
           }`}
-          id="username-field"
+          id="signup-username-field"
           minLength="2"
           maxLength="30"
           required
@@ -139,11 +151,17 @@ function SignupPopup({ visible, onClose }) {
           className={`popup-form__field-error ${
             !isUsernameValid && 'popup-form__field-error_active'
           }`}
-          id="username-field-error"
+          id="signup-username-field-error"
         >
           {usernameValidationMessage}
         </span>
       </div>
+      <p className="popup__text">
+        Or{' '}
+        <span onClick={onSigninLinkClick} className="popup__link">
+          Sign in
+        </span>
+      </p>
     </PopupWithForm>
   );
 }
