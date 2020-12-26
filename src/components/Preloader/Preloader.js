@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../vendor/preloader/preloader.css';
+import './Preloader.css';
 
 function Preloader() {
   return <i className="circle-preloader"></i>;
