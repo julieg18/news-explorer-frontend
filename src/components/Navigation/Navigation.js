@@ -58,7 +58,7 @@ function Navigation({
                 </li>
                 <li className="navigation__item">
                   <button className="navigation__btn">
-                    Name <span className="navigation__btn-icon"></span>
+                    Elise <span className="navigation__btn-icon"></span>
                   </button>
                 </li>
               </>
@@ -99,7 +99,7 @@ function Navigation({
             </li>
             <li className="navigation__item">
               <button className="navigation__btn">
-                Name <span className="navigation__btn-icon"></span>
+                Elise <span className="navigation__btn-icon"></span>
               </button>
             </li>
           </>
