@@ -12,7 +12,7 @@ function SigninPopup({ visible, onClose, onSignupLinkClick }) {
     '',
   );
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   function handleEmailInputChange(e) {
     const input = e.target;

@@ -10,7 +10,7 @@ import SigninPopup from '../SigninPopup/SigninPopup';
 import './App.css';
 
 function App() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn] = useState(false);
   const [
     isRegistrationSuccessfulMessagePopupOpen,
     setIsRegistrationSuccessfulMessagePopupOpen,
@@ -18,8 +18,8 @@ function App() {
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: 'Elise' });
-  const [cards, setCards] = useState([
+  const [currentUser] = useState({ name: 'Elise' });
+  const [cards] = useState([
     {
       id: '765',
       title: "Everyone Needs a Special 'Sit Spot' in Nature",
