@@ -5,7 +5,11 @@ import './SavedNewsHeader.css';
 function SavedNewsHeader({ isUserLoggedIn }) {
   return (
     <>
-      <Navigation isUserLoggedIn={isUserLoggedIn} lightTheme />
+      <Navigation
+        onSigninLinkClick={() => {}}
+        isUserLoggedIn={isUserLoggedIn}
+        lightTheme
+      />
       <header className="saved-news-header">
         <h1 className="saved-news-header__heading">Saved articles</h1>
         <p className="saved-news-header__text">
