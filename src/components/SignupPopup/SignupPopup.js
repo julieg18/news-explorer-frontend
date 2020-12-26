@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import Button from '../Button/Button';
 
 function SignupPopup({ visible, onClose, onSigninLinkClick }) {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function SignupPopup({ visible, onClose, onSigninLinkClick }) {
     '',
   );
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleEmailInputChange(e) {
     const input = e.target;
@@ -156,6 +158,12 @@ function SignupPopup({ visible, onClose, onSigninLinkClick }) {
           {usernameValidationMessage}
         </span>
       </div>
+      <Button
+        disabled={!isFormValid}
+        additionalClasses="popup-form__submit-btn"
+      >
+        {isLoading ? 'Loading...' : 'Sign up'}
+      </Button>
       <p className="popup__text">
         Or{' '}
         <span onClick={onSigninLinkClick} className="popup__link">

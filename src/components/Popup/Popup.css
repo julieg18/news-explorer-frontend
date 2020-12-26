@@ -43,6 +43,7 @@
   font-family: Inter, sans-serif;
   font-weight: normal;
   text-align: center;
+  margin: 16px 0 0;
 }
 
 .popup__link {
@@ -55,6 +56,10 @@
   text-align: center;
   margin: 16px 0 0;
   display: inline-block;
+}
+
+.popup__text .popup__link {
+  margin: 0;
 }
 
 .popup__link:hover {
