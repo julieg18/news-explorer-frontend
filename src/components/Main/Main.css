@@ -11,6 +11,11 @@
   margin: 0 0 52px;
 }
 
+.search-results__no-results-text {
+  text-align: center;
+  margin: 0;
+}
+
 .search-results__preloader {
   height: 50px;
   margin-top: 64px;

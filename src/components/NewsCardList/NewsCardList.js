@@ -3,7 +3,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import './NewsCardList.css';
 
 function NewsCardList({ cards, areCardsInMain, isUserLoggedIn }) {
-  return (
+  return cards.length > 0 ? (
     <ul className="news-card-list">
       {cards.map((card) => (
         <li key={card.id} className="news-card-list__card">
@@ -15,6 +15,8 @@ function NewsCardList({ cards, areCardsInMain, isUserLoggedIn }) {
         </li>
       ))}
     </ul>
+  ) : (
+    ''
   );
 }
 
