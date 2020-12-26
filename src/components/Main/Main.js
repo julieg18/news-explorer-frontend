@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
 import Button from '../Button/Button';
+import Preloader from '../Preloader/Preloader';
 import './Main.css';
 
 function Main({ cards, isUserLoggedIn }) {
+  const [isLoading] = useState(true);
+
   return (
     <main>
       <section className="search-results">
@@ -14,9 +17,15 @@ function Main({ cards, isUserLoggedIn }) {
           cards={cards}
           isUserLoggedIn={isUserLoggedIn}
         />
-        <Button lightTheme additionalClasses="search-results__show-more-btn">
-          Show More
-        </Button>
+        {isLoading ? (
+          <div className="search-results__preloader">
+            <Preloader />
+          </div>
+        ) : (
+          <Button lightTheme additionalClasses="search-results__show-more-btn">
+            Show More
+          </Button>
+        )}
       </section>
       <About />
     </main>

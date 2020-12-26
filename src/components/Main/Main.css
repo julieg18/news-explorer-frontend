@@ -11,6 +11,12 @@
   margin: 0 0 52px;
 }
 
+.search-results__preloader {
+  height: 50px;
+  margin-top: 64px;
+  position: relative;
+}
+
 .search-results__show-more-btn {
   width: 100%;
   margin: 16px 0 0;
