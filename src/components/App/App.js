@@ -133,25 +133,6 @@ function App() {
             isUserLoggedIn={isUserLoggedIn}
           />
           <Main isUserLoggedIn={isUserLoggedIn} cards={cards} />
-          <Popup
-            visible={isRegistrationSuccessfulMessagePopupOpen}
-            headingText="Registration successfully completed!"
-            onClose={closeAllPopups}
-          >
-            <a className="popup__link" href="/signup">
-              Sign up
-            </a>
-          </Popup>
-          <SigninPopup
-            onSignupLinkClick={openSignupPopup}
-            onClose={closeAllPopups}
-            visible={isSigninPopupOpen}
-          />
-          <SignupPopup
-            onSigninLinkClick={openSigninPopup}
-            onClose={closeAllPopups}
-            visible={isSignupPopupOpen}
-          />
         </Route>
         <Route path="/saved-news">
           <SavedNews
@@ -162,6 +143,25 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <Popup
+        visible={isRegistrationSuccessfulMessagePopupOpen}
+        headingText="Registration successfully completed!"
+        onClose={closeAllPopups}
+      >
+        <p className="popup__link" onClick={openSignupPopup}>
+          Sign up
+        </p>
+      </Popup>
+      <SigninPopup
+        onSignupLinkClick={openSignupPopup}
+        onClose={closeAllPopups}
+        visible={isSigninPopupOpen}
+      />
+      <SignupPopup
+        onSigninLinkClick={openSigninPopup}
+        onClose={closeAllPopups}
+        visible={isSignupPopupOpen}
+      />
     </div>
   );
 }
