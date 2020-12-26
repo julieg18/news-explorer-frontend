@@ -67,7 +67,7 @@
   list-style: none;
   position: absolute;
   background-color: #1a1b22;
-  color: inherit;
+  color: #fff;
   top: -500px;
   right: 0;
   width: 100%;
@@ -148,6 +148,10 @@
   border: 1px solid #1a1b22;
 }
 
+.navigation__dropdown .navigation__btn {
+  border: 1px solid #fff;
+}
+
 .navigation__btn:hover {
   cursor: pointer;
 }
@@ -165,6 +169,10 @@
   background-image: url(../../images/logout-black.svg);
 }
 
+.navigation__dropdown .navigation__btn-icon {
+  background-image: url(../../images/logout-white.svg);
+}
+
 @media (min-width: 768px) {
   .navigation {
     padding: 0 40px;
@@ -179,6 +187,10 @@
   }
 
   .navigation__mobile-btn {
+    display: none;
+  }
+
+  .navigation .overlay {
     display: none;
   }
 
