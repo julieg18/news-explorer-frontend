@@ -1,9 +1,9 @@
 .header {
-  background-image: url(../../images/georgia-de-lotz.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   color: #fff;
+  background-image: url(../../images/georgia-de-lotz-small-screen.jpg);
 }
 
 .header__title {
@@ -22,6 +22,10 @@
 }
 
 @media (min-width: 768px) {
+  .header {
+    background-image: url(../../images/georgia-de-lotz.jpg);
+  }
+
   .header__title {
     margin: 40px 160px 0;
     width: 400px;
