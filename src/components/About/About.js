@@ -8,7 +8,7 @@ function About() {
       <img
         className="about__img"
         src={authorImg}
-        alt="The author, Julie Galvan."
+        alt="A woman standing crosslegged in a grassy area"
       />
       <h2 className="about__title">About the author</h2>
       <p className="about__text">
