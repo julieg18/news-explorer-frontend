@@ -6,7 +6,7 @@ import './SavedNews.css';
 function SavedNews({ isUserLoggedIn, cards }) {
   return (
     <>
-      <SavedNewsHeader />
+      <SavedNewsHeader isUserLoggedIn={isUserLoggedIn} />
       <section className="saved-news">
         <NewsCardList isUserLoggedIn={isUserLoggedIn} cards={cards} />
       </section>

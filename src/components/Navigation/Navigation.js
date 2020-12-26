@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import Overlay from '../Overlay/Overlay';
 import './Navigation.css';
 
-function Navigation({ lightTheme, isPopupOpen, onSigninLinkClick }) {
+function Navigation({
+  isUserLoggedIn,
+  lightTheme,
+  isPopupOpen,
+  onSigninLinkClick,
+}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   function toggleDropDown() {
     setIsDropdownOpen(!isDropdownOpen);
+  }
+
+  function handleSigninLinkClick() {
+    setIsDropdownOpen(false);
+    onSigninLinkClick();
   }
 
   return (
@@ -34,52 +45,71 @@ function Navigation({ lightTheme, isPopupOpen, onSigninLinkClick }) {
           </div>
           <ul className="navigation__dropdown-items">
             <li className="navigation__item">
-              <a href="#home" className="navigation__link">
+              <Link to="/" className="navigation__link">
                 Home
-              </a>
+              </Link>
             </li>
-            <li className="navigation__item navigation__item_hidden">
-              <a href="#articles" className="navigation__link">
-                Saved Articles
-              </a>
-            </li>
-            <li className="navigation__item">
-              <button onClick={onSigninLinkClick} className="navigation__btn">
-                Sign In
-              </button>
-            </li>
-            <li className="navigation__item navigation__item_hidden">
-              <button className="navigation__btn">
-                Name <span className="navigation__btn-icon"></span>
-              </button>
-            </li>
+            {isUserLoggedIn ? (
+              <>
+                <li className="navigation__item">
+                  <Link to="/saved-news" className="navigation__link">
+                    Saved Articles
+                  </Link>
+                </li>
+                <li className="navigation__item">
+                  <button className="navigation__btn">
+                    Name <span className="navigation__btn-icon"></span>
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="navigation__item">
+                <button
+                  onClick={handleSigninLinkClick}
+                  className="navigation__btn"
+                >
+                  Sign In
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </Overlay>
       <ul className="navigation__items">
         <li className="navigation__item">
-          <a
-            href="#home"
-            className="navigation__link navigation__link_selected"
+          <NavLink
+            exact
+            to="/"
+            className="navigation__link"
+            activeClassName="navigation__link_selected"
           >
             Home
-          </a>
+          </NavLink>
         </li>
-        <li className="navigation__item navigation__item_hidden">
-          <a href="#articles" className="navigation__link">
-            Saved Articles
-          </a>
-        </li>
-        <li className="navigation__item">
-          <button onClick={onSigninLinkClick} className="navigation__btn">
-            Sign In
-          </button>
-        </li>
-        <li className="navigation__item navigation__item_hidden">
-          <button className="navigation__btn">
-            Name <span className="navigation__btn-icon"></span>
-          </button>
-        </li>
+        {isUserLoggedIn ? (
+          <>
+            <li className="navigation__item">
+              <NavLink
+                activeClassName="navigation__link_selected"
+                to="/saved-news"
+                className="navigation__link"
+              >
+                Saved Articles
+              </NavLink>
+            </li>
+            <li className="navigation__item">
+              <button className="navigation__btn">
+                Name <span className="navigation__btn-icon"></span>
+              </button>
+            </li>
+          </>
+        ) : (
+          <li className="navigation__item">
+            <button onClick={onSigninLinkClick} className="navigation__btn">
+              Sign In
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );

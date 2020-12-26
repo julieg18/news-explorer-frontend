@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -17,6 +18,7 @@ function App() {
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ name: 'Elise' });
   const [cards, setCards] = useState([
     {
       id: '765',
@@ -123,28 +125,43 @@ function App() {
 
   return (
     <div className="App">
-      <Header onSigninLinkClick={openSigninPopup} isPopupOpen={isPopupOpen} />
-      <Main isUserLoggedIn={isUserLoggedIn} cards={cards} />
+      <Switch>
+        <Route exact path="/">
+          <Header
+            onSigninLinkClick={openSigninPopup}
+            isPopupOpen={isPopupOpen}
+            isUserLoggedIn={isUserLoggedIn}
+          />
+          <Main isUserLoggedIn={isUserLoggedIn} cards={cards} />
+          <Popup
+            visible={isRegistrationSuccessfulMessagePopupOpen}
+            headingText="Registration successfully completed!"
+            onClose={closeAllPopups}
+          >
+            <a className="popup__link" href="/signup">
+              Sign up
+            </a>
+          </Popup>
+          <SigninPopup
+            onSignupLinkClick={openSignupPopup}
+            onClose={closeAllPopups}
+            visible={isSigninPopupOpen}
+          />
+          <SignupPopup
+            onSigninLinkClick={openSigninPopup}
+            onClose={closeAllPopups}
+            visible={isSignupPopupOpen}
+          />
+        </Route>
+        <Route path="/saved-news">
+          <SavedNews
+            isUserLoggedIn={isUserLoggedIn}
+            currentUser={currentUser}
+            cards={cards}
+          />
+        </Route>
+      </Switch>
       <Footer />
-      <Popup
-        visible={isRegistrationSuccessfulMessagePopupOpen}
-        headingText="Registration successfully completed!"
-        onClose={closeAllPopups}
-      >
-        <a className="popup__link" href="/signup">
-          Sign up
-        </a>
-      </Popup>
-      <SigninPopup
-        onSignupLinkClick={openSignupPopup}
-        onClose={closeAllPopups}
-        visible={isSigninPopupOpen}
-      />
-      <SignupPopup
-        onSigninLinkClick={openSigninPopup}
-        onClose={closeAllPopups}
-        visible={isSignupPopupOpen}
-      />
     </div>
   );
 }

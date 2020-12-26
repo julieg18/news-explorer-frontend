@@ -2,11 +2,11 @@ import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import './SavedNewsHeader.css';
 
-function SavedNewsHeader() {
+function SavedNewsHeader({ isUserLoggedIn }) {
   return (
     <>
-      <Navigation lightTheme />
-      <header class="saved-news-header">
+      <Navigation isUserLoggedIn={isUserLoggedIn} lightTheme />
+      <header className="saved-news-header">
         <h1 className="saved-news-header__heading">Saved articles</h1>
         <p className="saved-news-header__text">
           Elise, you have 5 saved articles
