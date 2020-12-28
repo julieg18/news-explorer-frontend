@@ -1,0 +1,29 @@
+.overlay {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity ease-in-out 0.2s, visibility ease-in-out 0.2s;
+}
+
+.overlay:hover {
+  cursor: pointer;
+}
+
+.overlay_visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

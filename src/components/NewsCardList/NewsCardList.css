@@ -1,0 +1,32 @@
+.news-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  row-gap: 10px;
+  display: grid;
+}
+
+@media (min-width: 768px) {
+  .news-card-list {
+    display: grid;
+    grid-template-rows: 420px;
+    grid-template-columns: repeat(3, calc((100% - 16px) / 3));
+    column-gap: 8px;
+    row-gap: 8px;
+    grid-auto-rows: 420px;
+    grid-auto-columns: calc((100% - 16px) / 3) calc((100% - 16px) / 3)
+      calc((100% - 16px) / 3);
+  }
+}
+
+@media (min-width: 1280px) {
+  .news-card-list {
+    grid-template-rows: 576px;
+    grid-auto-rows: 576px;
+    row-gap: 16px;
+    column-gap: 16px;
+    grid-template-columns: repeat(3, calc((100% - 32px) / 3));
+    grid-auto-columns: calc((100% - 32px) / 3) calc((100% - 32px) / 3)
+      calc((100% - 32px) / 3);
+  }
+}

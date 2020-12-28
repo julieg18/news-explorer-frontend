@@ -1,0 +1,67 @@
+.popup-form__submit-btn {
+  width: 100%;
+  margin: 24px 0 0;
+}
+
+.popup-form__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, sans-serif;
+}
+
+.popup-form__field-label {
+  margin: 15px 0 0;
+  color: #2f71e5;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.popup-form__field-input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 10px 0 0;
+  padding: 0 0 4px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  caret-color: #2f71e5;
+}
+
+.popup-form__field-input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.popup-form__field-input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.popup-form__field-input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.popup-form__field-input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.popup-form__field-error {
+  margin: 3px 0 0;
+  height: 15px;
+  display: inline-block;
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 15px;
+}
