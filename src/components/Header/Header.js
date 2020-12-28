@@ -3,7 +3,12 @@ import Navigation from '../Navigation/Navigation';
 import SearchForm from '../SearchForm/SearchForm';
 import './Header.css';
 
-function Header({ isPopupOpen, onSigninLinkClick, isUserLoggedIn }) {
+function Header({
+  isPopupOpen,
+  onSigninLinkClick,
+  isUserLoggedIn,
+  onNewsSearch,
+}) {
   return (
     <header className="header">
       <Navigation
@@ -16,7 +21,7 @@ function Header({ isPopupOpen, onSigninLinkClick, isUserLoggedIn }) {
         Find the latest news on any topic and save them in your personal
         account.
       </p>
-      <SearchForm />
+      <SearchForm onNewsSearch={onNewsSearch} />
     </header>
   );
 }

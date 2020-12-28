@@ -11,6 +11,15 @@
   margin: 0 0 52px;
 }
 
+.search-results__text {
+  font-family: Roboto, sans-serif;
+  color: #b6bcbf;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+}
+
 .search-results__not-found-icon {
   background-image: url(../../images/not-found.svg);
   background-size: contain;
@@ -29,13 +38,7 @@
 }
 
 .search-results__not-found-text {
-  font-family: Roboto, sans-serif;
-  color: #b6bcbf;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 24px;
   max-width: 250px;
-  text-align: center;
   margin: 16px auto 0;
 }
 
@@ -45,13 +48,7 @@
 }
 
 .search-results__preloader-text {
-  color: #b6bcbf;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 24px;
-  font-family: Roboto, sans-serif;
   margin: 24px 0 0;
-  text-align: center;
 }
 
 .search-results__show-more-btn {

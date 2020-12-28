@@ -7,10 +7,12 @@ function Button({
   disabled,
   type = 'button',
   additionalClasses = '',
+  onClick,
 }) {
   return (
     <button
       disabled={disabled}
+      onClick={onClick}
       className={`button ${
         lightTheme && 'button_theme_light'
       } ${additionalClasses}`}

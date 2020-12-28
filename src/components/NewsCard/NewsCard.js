@@ -4,7 +4,7 @@ import './NewsCard.css';
 function NewsCard({
   isCardInMain,
   isUserLoggedIn,
-  card: { title, text, date, source, link, image, keyword, saved },
+  article: { title, text, date, source, link, image, keyword, saved },
 }) {
   function handleBtnClick(e) {
     e.preventDefault();
@@ -39,7 +39,9 @@ function NewsCard({
           <span className="news-card__btn-tooltip">Remove from saved</span>
         </>
       )}
-      <p className="news-card__date">{date}</p>
+      <p className="news-card__date">
+        {new Date(date).toLocaleDateString('en-US', { dateStyle: 'long' })}
+      </p>
       <h3 className="news-card__title">{title}</h3>
       <p className="news-card__text">{text}</p>
       <p className="news-card__source">{source}</p>
