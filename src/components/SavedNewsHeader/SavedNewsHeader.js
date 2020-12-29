@@ -2,13 +2,14 @@ import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import './SavedNewsHeader.css';
 
-function SavedNewsHeader({ isUserLoggedIn }) {
+function SavedNewsHeader({ isUserLoggedIn, onLogoutUser }) {
   return (
     <>
       <Navigation
         onSigninLinkClick={() => {}}
         isUserLoggedIn={isUserLoggedIn}
         lightTheme
+        onLogoutUser={onLogoutUser}
       />
       <header className="saved-news-header">
         <h1 className="saved-news-header__heading">Saved articles</h1>

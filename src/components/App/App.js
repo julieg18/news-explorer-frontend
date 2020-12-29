@@ -8,18 +8,20 @@ import Popup from '../Popup/Popup';
 import SignupPopup from '../SignupPopup/SignupPopup';
 import SigninPopup from '../SigninPopup/SigninPopup';
 import newsApi from '../../utils/newsApi';
+import authApi from '../../utils/authApi';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 
 function App() {
-  const [isUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [
-    isRegistrationSuccessfulMessagePopupOpen,
-    setIsRegistrationSuccessfulMessagePopupOpen,
+    isRegistrationSuccessfulPopupOpen,
+    setIsRegistrationSuccessfulPopupOpen,
   ] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [currentUser] = useState({ name: 'Elise' });
   const [newsQuery, setNewsQuery] = useState('');
   const [areCardsLoading, setAreCardsLoading] = useState(false);
   const [showSearchResultsError, setShowSearchResultsError] = useState(false);
@@ -29,7 +31,11 @@ function App() {
 
   useMountEffect(() => {
     if (localStorage.getItem('articlesQuery')) {
-      handleNewsSearch(localStorage.getItem('articlesQuery'));
+      // handleNewsSearch(localStorage.getItem('articlesQuery'));
+    }
+
+    if (localStorage.getItem('token')) {
+      getUser();
     }
   });
 
@@ -52,7 +58,7 @@ function App() {
   }
 
   function closeAllPopups() {
-    setIsRegistrationSuccessfulMessagePopupOpen(false);
+    setIsRegistrationSuccessfulPopupOpen(false);
     setIsSignupPopupOpen(false);
     setIsSigninPopupOpen(false);
     setIsPopupOpen(false);
@@ -83,53 +89,97 @@ function App() {
     setIsSigninPopupOpen(true);
   }
 
+  function openRegistrationSuccessfulPopup() {
+    closeAllPopups();
+    setEscPopupCloseEventListener();
+    setIsPopupOpen(true);
+    setIsRegistrationSuccessfulPopupOpen(true);
+  }
+
+  function getUser() {
+    const token = localStorage.getItem('token');
+    authApi.checkUserValidity(token).then(({ user }) => {
+      setIsUserLoggedIn(true);
+      setCurrentUser(user);
+    });
+  }
+
+  function signupUser({ username: name, email, password }) {
+    return authApi.signupUser({ name, email, password }).then(() => {
+      openRegistrationSuccessfulPopup();
+    });
+  }
+
+  function signinUser({ email, password }) {
+    return authApi
+      .signinUser({ email, password })
+      .then(({ token }) => {
+        localStorage.setItem('token', token);
+        return getUser();
+      })
+      .then(() => {
+        closeAllPopups();
+      });
+  }
+
+  function logoutUser() {
+    localStorage.removeItem('token');
+    setIsUserLoggedIn(false);
+    setCurrentUser({});
+  }
+
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Header
-            onSigninLinkClick={openSignupPopup}
-            isPopupOpen={isPopupOpen}
-            isUserLoggedIn={isUserLoggedIn}
-            onNewsSearch={handleNewsSearch}
-          />
-          <Main
-            showSearchResults={newsQuery !== ''}
-            isUserLoggedIn={isUserLoggedIn}
-            areCardsLoading={areCardsLoading}
-            articles={articles}
-            showSearchResultsError={showSearchResultsError}
-          />
-        </Route>
-        <Route path="/saved-news">
-          <SavedNews
-            isUserLoggedIn={isUserLoggedIn}
-            currentUser={currentUser}
-            articles={articles}
-          />
-        </Route>
-      </Switch>
-      <Footer />
-      <Popup
-        visible={isRegistrationSuccessfulMessagePopupOpen}
-        headingText="Registration successfully completed!"
-        onClose={closeAllPopups}
-      >
-        <p className="popup__link" onClick={openSignupPopup}>
-          Sign up
-        </p>
-      </Popup>
-      <SigninPopup
-        onSignupLinkClick={openSignupPopup}
-        onClose={closeAllPopups}
-        visible={isSigninPopupOpen}
-      />
-      <SignupPopup
-        onSigninLinkClick={openSigninPopup}
-        onClose={closeAllPopups}
-        visible={isSignupPopupOpen}
-      />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Header
+              onLogoutUser={logoutUser}
+              onSigninLinkClick={openSignupPopup}
+              isPopupOpen={isPopupOpen}
+              isUserLoggedIn={isUserLoggedIn}
+              onNewsSearch={handleNewsSearch}
+            />
+            <Main
+              showSearchResults={newsQuery !== ''}
+              isUserLoggedIn={isUserLoggedIn}
+              areCardsLoading={areCardsLoading}
+              articles={articles}
+              showSearchResultsError={showSearchResultsError}
+            />
+          </Route>
+          <Route path="/saved-news">
+            <SavedNews
+              onLogoutUser={logoutUser}
+              isUserLoggedIn={isUserLoggedIn}
+              articles={articles}
+            />
+          </Route>
+        </Switch>
+        <Footer />
+        <Popup
+          visible={isRegistrationSuccessfulPopupOpen}
+          headingText="Registration successfully completed!"
+          onClose={closeAllPopups}
+        >
+          <p className="popup__link" onClick={openSigninPopup}>
+            Sign in
+          </p>
+        </Popup>
+        <SigninPopup
+          onSignupLinkClick={openSignupPopup}
+          onClose={closeAllPopups}
+          visible={isSigninPopupOpen}
+          onSigninUser={signinUser}
+        />
+        <SignupPopup
+          onSigninLinkClick={openSigninPopup}
+          onClose={closeAllPopups}
+          visible={isSignupPopupOpen}
+          onSignupUser={signupUser}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -8,6 +8,7 @@ function Header({
   onSigninLinkClick,
   isUserLoggedIn,
   onNewsSearch,
+  onLogoutUser,
 }) {
   return (
     <header className="header">
@@ -15,6 +16,7 @@ function Header({
         isUserLoggedIn={isUserLoggedIn}
         isPopupOpen={isPopupOpen}
         onSigninLinkClick={onSigninLinkClick}
+        onLogoutUser={onLogoutUser}
       />
       <h2 className="header__title">What's going on in the world?</h2>
       <p className="header__text">
