@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import Popup from '../Popup/Popup';
 import SignupPopup from '../SignupPopup/SignupPopup';
 import SigninPopup from '../SigninPopup/SigninPopup';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import newsApi from '../../utils/newsApi';
 import authApi from '../../utils/authApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -148,13 +149,13 @@ function App() {
               showSearchResultsError={showSearchResultsError}
             />
           </Route>
-          <Route path="/saved-news">
-            <SavedNews
-              onLogoutUser={logoutUser}
-              isUserLoggedIn={isUserLoggedIn}
-              articles={articles}
-            />
-          </Route>
+          <ProtectedRoute
+            component={SavedNews}
+            path="/saved-news"
+            onLogoutUser={logoutUser}
+            isUserLoggedIn={isUserLoggedIn}
+            articles={articles}
+          />
         </Switch>
         <Footer />
         <Popup
