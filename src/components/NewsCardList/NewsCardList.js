@@ -7,6 +7,7 @@ function NewsCardList({
   areCardsInMain,
   isUserLoggedIn,
   onSaveArticle,
+  onDeleteArticle,
 }) {
   return articles.length > 0 ? (
     <ul className="news-card-list">
@@ -17,6 +18,7 @@ function NewsCardList({
             isCardInMain={areCardsInMain}
             article={article}
             isUserLoggedIn={isUserLoggedIn}
+            onDeleteArticle={onDeleteArticle}
           />
         </li>
       ))}

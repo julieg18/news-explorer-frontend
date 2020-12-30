@@ -189,6 +189,21 @@ function App() {
       });
   }
 
+  function deleteSavedArticle(articleId) {
+    articlesApi
+      .deleteArticle(articleId)
+      .then(() => {
+        const newSavedArticles = savedArticles.filter(
+          (article) => articleId !== article._id,
+        );
+        setSavedArticles(newSavedArticles);
+        setArticles(addUserInfoToArticles(articles, newSavedArticles));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -216,6 +231,7 @@ function App() {
             onLogoutUser={logoutUser}
             isUserLoggedIn={isUserLoggedIn}
             articles={savedArticles}
+            onDeleteArticle={deleteSavedArticle}
           />
         </Switch>
         <Footer />

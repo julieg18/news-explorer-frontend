@@ -35,6 +35,7 @@ class ArticlesApi {
 
   deleteArticle(articleId) {
     return fetch(`${this._baseUrl}/${articleId}`, {
+      method: 'DELETE',
       headers: {
         ...this._headers,
         Authorization: `Bearer ${localStorage.getItem('token')}`,
