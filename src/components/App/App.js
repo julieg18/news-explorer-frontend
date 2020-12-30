@@ -8,9 +8,8 @@ import Popup from '../Popup/Popup';
 import SignupPopup from '../SignupPopup/SignupPopup';
 import SigninPopup from '../SigninPopup/SigninPopup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import newsApi from '../../utils/newsApi';
-import authApi from '../../utils/authApi';
-import articlesApi from '../../utils/articlesApi';
+import newsApi from '../../utils/NewsApi';
+import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 
@@ -57,7 +56,7 @@ function App() {
   });
 
   function getSavedArticles() {
-    return articlesApi
+    return mainApi
       .getSavedArticles()
       .then(({ articles }) => {
         setSavedArticles(articles);
@@ -141,7 +140,7 @@ function App() {
 
   function getUser() {
     const token = localStorage.getItem('token');
-    return authApi
+    return mainApi
       .checkUserValidity(token)
       .then(({ user }) => {
         setIsUserLoggedIn(true);
@@ -154,13 +153,13 @@ function App() {
   }
 
   function signupUser({ username: name, email, password }) {
-    return authApi.signupUser({ name, email, password }).then(() => {
+    return mainApi.signupUser({ name, email, password }).then(() => {
       openRegistrationSuccessfulPopup();
     });
   }
 
   function signinUser({ email, password }) {
-    return authApi
+    return mainApi
       .signinUser({ email, password })
       .then(({ token }) => {
         localStorage.setItem('token', token);
@@ -187,7 +186,7 @@ function App() {
       link,
       image,
     };
-    articlesApi
+    mainApi
       .createArticle(newArticle)
       .then(({ article }) => {
         setSavedArticles([...savedArticles, article]);
@@ -201,7 +200,7 @@ function App() {
   }
 
   function deleteSavedArticle(articleId) {
-    articlesApi
+    mainApi
       .deleteArticle(articleId)
       .then(() => {
         const newSavedArticles = savedArticles.filter(
