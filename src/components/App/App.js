@@ -55,91 +55,6 @@ function App() {
     }
   });
 
-  function getSavedArticles() {
-    return mainApi
-      .getSavedArticles()
-      .then(({ articles }) => {
-        setSavedArticles(articles);
-        return articles;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function addUserInfoToArticles(articlesToBeUpdated, savedArticlesArr) {
-    const updatedArticles = articlesToBeUpdated.map((article) => {
-      const foundSavedArticle = savedArticlesArr.find(
-        (savedArticle) => savedArticle.link === article.url,
-      );
-      return {
-        ...article,
-        saved: Boolean(foundSavedArticle),
-        _id: foundSavedArticle ? foundSavedArticle._id : null,
-      };
-    });
-    return updatedArticles;
-  }
-
-  function handleNewsSearch(query, savedArticlesArr) {
-    setNewsQuery(query);
-    localStorage.setItem('articlesQuery', query);
-    setAreCardsLoading(true);
-    return newsApi
-      .getArticles(query)
-      .then(({ articles }) => {
-        setArticles(
-          addUserInfoToArticles(articles, savedArticlesArr || savedArticles),
-        );
-        setAreCardsLoading(false);
-        setShowSearchResultsError(false);
-      })
-      .catch((err) => {
-        setAreCardsLoading(false);
-        setShowSearchResultsError(true);
-        console.log(err);
-      });
-  }
-
-  function closeAllPopups() {
-    setIsRegistrationSuccessfulPopupOpen(false);
-    setIsSignupPopupOpen(false);
-    setIsSigninPopupOpen(false);
-    setIsPopupOpen(false);
-    window.removeEventListener('keyup', handleEscPopupClose);
-  }
-
-  function handleEscPopupClose(e) {
-    if (e.key === 'Escape') {
-      closeAllPopups();
-    }
-  }
-
-  function setEscPopupCloseEventListener() {
-    window.addEventListener('keyup', handleEscPopupClose);
-  }
-
-  function openSignupPopup() {
-    closeAllPopups();
-    setEscPopupCloseEventListener();
-    setIsPopupOpen(true);
-    setIsSignupPopupOpen(true);
-  }
-
-  function openSigninPopup() {
-    closeAllPopups();
-    setEscPopupCloseEventListener();
-    setIsPopupOpen(true);
-    setIsSigninPopupOpen(true);
-  }
-
-  function openRegistrationSuccessfulPopup() {
-    closeAllPopups();
-    setEscPopupCloseEventListener();
-    setIsPopupOpen(true);
-    setIsRegistrationSuccessfulPopupOpen(true);
-  }
-
   function getUser() {
     const token = localStorage.getItem('token');
     return mainApi
@@ -224,6 +139,91 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function getSavedArticles() {
+    return mainApi
+      .getSavedArticles()
+      .then(({ articles }) => {
+        setSavedArticles(articles);
+        return articles;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function addUserInfoToArticles(articlesToBeUpdated, savedArticlesArr) {
+    const updatedArticles = articlesToBeUpdated.map((article) => {
+      const foundSavedArticle = savedArticlesArr.find(
+        (savedArticle) => savedArticle.link === article.url,
+      );
+      return {
+        ...article,
+        saved: Boolean(foundSavedArticle),
+        _id: foundSavedArticle ? foundSavedArticle._id : null,
+      };
+    });
+    return updatedArticles;
+  }
+
+  function handleNewsSearch(query, savedArticlesArr) {
+    setNewsQuery(query);
+    localStorage.setItem('articlesQuery', query);
+    setAreCardsLoading(true);
+    return newsApi
+      .getArticles(query)
+      .then(({ articles }) => {
+        setArticles(
+          addUserInfoToArticles(articles, savedArticlesArr || savedArticles),
+        );
+        setAreCardsLoading(false);
+        setShowSearchResultsError(false);
+      })
+      .catch((err) => {
+        setAreCardsLoading(false);
+        setShowSearchResultsError(true);
+        console.log(err);
+      });
+  }
+
+  function closeAllPopups() {
+    setIsRegistrationSuccessfulPopupOpen(false);
+    setIsSignupPopupOpen(false);
+    setIsSigninPopupOpen(false);
+    setIsPopupOpen(false);
+    window.removeEventListener('keyup', handleEscPopupClose);
+  }
+
+  function handleEscPopupClose(e) {
+    if (e.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  function setEscPopupCloseEventListener() {
+    window.addEventListener('keyup', handleEscPopupClose);
+  }
+
+  function openSignupPopup() {
+    closeAllPopups();
+    setEscPopupCloseEventListener();
+    setIsPopupOpen(true);
+    setIsSignupPopupOpen(true);
+  }
+
+  function openSigninPopup() {
+    closeAllPopups();
+    setEscPopupCloseEventListener();
+    setIsPopupOpen(true);
+    setIsSigninPopupOpen(true);
+  }
+
+  function openRegistrationSuccessfulPopup() {
+    closeAllPopups();
+    setEscPopupCloseEventListener();
+    setIsPopupOpen(true);
+    setIsRegistrationSuccessfulPopupOpen(true);
   }
 
   return (
