@@ -34,21 +34,30 @@ function App() {
 
   useMountEffect(() => {
     if (localStorage.getItem('token')) {
-      getUser();
+      getUser()
+        .then(() => {
+          return getSavedArticles();
+        })
+        .then((savedArticlesArr) => {
+          handleNewsSearch(
+            localStorage.getItem('articlesQuery'),
+            savedArticlesArr,
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    if (localStorage.getItem('articlesQuery')) {
+    if (
+      localStorage.getItem('articlesQuery') &&
+      !localStorage.getItem('token')
+    ) {
       handleNewsSearch(localStorage.getItem('articlesQuery'));
     }
   });
 
-  useEffect(() => {
-    setArticles((a) => {
-      return addUserInfoToArticles(a, savedArticles);
-    });
-  }, [savedArticles]);
-
   function getSavedArticles() {
-    articlesApi
+    return articlesApi
       .getSavedArticles()
       .then(({ articles }) => {
         setSavedArticles(articles);
@@ -71,14 +80,16 @@ function App() {
     return updatedArticles;
   }
 
-  function handleNewsSearch(query) {
+  function handleNewsSearch(query, savedArticlesArr) {
     setNewsQuery(query);
     localStorage.setItem('articlesQuery', query);
     setAreCardsLoading(true);
     return newsApi
       .getArticles(query)
       .then(({ articles }) => {
-        setArticles(addUserInfoToArticles(articles, savedArticles));
+        setArticles(
+          addUserInfoToArticles(articles, savedArticlesArr || savedArticles),
+        );
         setAreCardsLoading(false);
         setShowSearchResultsError(false);
       })
@@ -135,7 +146,7 @@ function App() {
       .then(({ user }) => {
         setIsUserLoggedIn(true);
         setCurrentUser(user);
-        getSavedArticles();
+        return getSavedArticles();
       })
       .catch((err) => {
         console.log(err);
