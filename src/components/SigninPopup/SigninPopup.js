@@ -38,7 +38,6 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
 
     setIsLoading(true);
     onSigninUser({ email, password }).catch((err) => {
-      console.log({ err });
       setFormError(err.message);
       setIsLoading(false);
     });

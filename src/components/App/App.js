@@ -10,6 +10,7 @@ import SigninPopup from '../SigninPopup/SigninPopup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import newsApi from '../../utils/newsApi';
 import authApi from '../../utils/authApi';
+import articlesApi from '../../utils/articlesApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './App.css';
 
@@ -27,27 +28,57 @@ function App() {
   const [areCardsLoading, setAreCardsLoading] = useState(false);
   const [showSearchResultsError, setShowSearchResultsError] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   /* eslint-disable-next-line */
   const useMountEffect = (func) => useEffect(func, []);
 
   useMountEffect(() => {
-    if (localStorage.getItem('articlesQuery')) {
-      // handleNewsSearch(localStorage.getItem('articlesQuery'));
-    }
-
     if (localStorage.getItem('token')) {
       getUser();
     }
+    if (localStorage.getItem('articlesQuery')) {
+      handleNewsSearch(localStorage.getItem('articlesQuery'));
+    }
   });
+
+  useEffect(() => {
+    setArticles((a) => {
+      return addUserInfoToArticles(a, savedArticles);
+    });
+  }, [savedArticles]);
+
+  function getSavedArticles() {
+    articlesApi
+      .getSavedArticles()
+      .then(({ articles }) => {
+        setSavedArticles(articles);
+        return articles;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function addUserInfoToArticles(articlesToBeUpdated, savedArticlesArr) {
+    const updatedArticles = articlesToBeUpdated.map((article) => {
+      return {
+        ...article,
+        saved: savedArticlesArr.some(
+          (savedArticle) => savedArticle.link === article.url,
+        ),
+      };
+    });
+    return updatedArticles;
+  }
 
   function handleNewsSearch(query) {
     setNewsQuery(query);
     localStorage.setItem('articlesQuery', query);
     setAreCardsLoading(true);
-    newsApi
+    return newsApi
       .getArticles(query)
       .then(({ articles }) => {
-        setArticles(articles);
+        setArticles(addUserInfoToArticles(articles, savedArticles));
         setAreCardsLoading(false);
         setShowSearchResultsError(false);
       })
@@ -99,10 +130,16 @@ function App() {
 
   function getUser() {
     const token = localStorage.getItem('token');
-    authApi.checkUserValidity(token).then(({ user }) => {
-      setIsUserLoggedIn(true);
-      setCurrentUser(user);
-    });
+    return authApi
+      .checkUserValidity(token)
+      .then(({ user }) => {
+        setIsUserLoggedIn(true);
+        setCurrentUser(user);
+        getSavedArticles();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function signupUser({ username: name, email, password }) {
@@ -129,6 +166,29 @@ function App() {
     setCurrentUser({});
   }
 
+  function saveArticle({ title, text, date, source, link, image }) {
+    const newArticle = {
+      keyword: newsQuery,
+      title,
+      text,
+      date,
+      source,
+      link,
+      image,
+    };
+    articlesApi
+      .createArticle(newArticle)
+      .then(({ article }) => {
+        setSavedArticles([...savedArticles, article]);
+        setArticles(
+          addUserInfoToArticles(articles, [...savedArticles, article]),
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -147,6 +207,7 @@ function App() {
               areCardsLoading={areCardsLoading}
               articles={articles}
               showSearchResultsError={showSearchResultsError}
+              onSaveArticle={saveArticle}
             />
           </Route>
           <ProtectedRoute
@@ -154,7 +215,7 @@ function App() {
             path="/saved-news"
             onLogoutUser={logoutUser}
             isUserLoggedIn={isUserLoggedIn}
-            articles={articles}
+            articles={savedArticles}
           />
         </Switch>
         <Footer />

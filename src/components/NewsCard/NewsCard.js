@@ -5,11 +5,14 @@ function NewsCard({
   isCardInMain,
   isUserLoggedIn,
   article: { title, text, date, source, link, image, keyword, saved },
+  onSaveArticle,
 }) {
   function handleBtnClick(e) {
     e.preventDefault();
+    if (!saved && isUserLoggedIn) {
+      onSaveArticle({ title, text, date: new Date(date), source, link, image });
+    }
   }
-
   return (
     <a href={link} target="_blank" rel="noreferrer" className="news-card">
       <img className="news-card__img" src={image} alt={title} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
 import Button from '../Button/Button';
@@ -11,17 +11,36 @@ function Main({
   showSearchResults,
   areCardsLoading,
   showSearchResultsError,
+  onSaveArticle,
 }) {
-  const [displayedArticles, setDisplayedArticles] = useState(
-    articles.slice(0, 3),
-  );
+  const [displayedArticlesLength, setDisplayedArticlesLength] = useState(3);
 
-  useEffect(() => {
-    setDisplayedArticles(articles.slice(0, 3));
-  }, [articles]);
+  function getDisplayedArticles(articlesToBeDisplayed) {
+    return articlesToBeDisplayed.map(
+      ({
+        title,
+        url,
+        description: text,
+        publishedAt: date,
+        source,
+        url: link,
+        urlToImage: image,
+        saved,
+      }) => ({
+        title,
+        url,
+        text,
+        date,
+        source: source.name,
+        link,
+        image,
+        saved,
+      }),
+    );
+  }
 
   function increaseDisplayedArticles() {
-    setDisplayedArticles(articles.slice(0, displayedArticles.length + 3));
+    setDisplayedArticlesLength(displayedArticlesLength + 3);
   }
 
   return (
@@ -58,10 +77,13 @@ function Main({
               <h2 className="search-results__title">Search Results</h2>
               <NewsCardList
                 areCardsInMain
-                articles={displayedArticles}
+                articles={getDisplayedArticles(
+                  articles.slice(0, displayedArticlesLength),
+                )}
                 isUserLoggedIn={isUserLoggedIn}
+                onSaveArticle={onSaveArticle}
               />
-              {displayedArticles.length < articles.length ? (
+              {displayedArticlesLength < articles.length ? (
                 <Button
                   lightTheme
                   additionalClasses="search-results__show-more-btn"
