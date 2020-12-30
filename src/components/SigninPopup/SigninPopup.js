@@ -37,10 +37,15 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
     e.preventDefault();
 
     setIsLoading(true);
-    onSigninUser({ email, password }).catch((err) => {
-      setFormError(err.message);
-      setIsLoading(false);
-    });
+    onSigninUser({ email, password })
+      .then(() => {
+        setIsLoading(false);
+        setFormError('');
+      })
+      .catch((err) => {
+        setFormError(err.message);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -100,7 +105,9 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
           {passwordValidationMessage}
         </span>
       </div>
-      <span className="popup-form__form-error">{formError}</span>
+      <span title={formError} className="popup-form__form-error">
+        {formError}
+      </span>
       <Button
         disabled={!isFormValid}
         additionalClasses="popup-form__submit-btn"

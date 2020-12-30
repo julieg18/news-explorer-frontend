@@ -77,6 +77,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        return Promise.reject(err);
       });
   }
 
@@ -93,6 +94,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        return Promise.reject(err);
       });
   }
 
