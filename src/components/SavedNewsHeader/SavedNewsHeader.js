@@ -6,10 +6,58 @@ import './SavedNewsHeader.css';
 function SavedNewsHeader({ isUserLoggedIn, onLogoutUser, articles }) {
   const { name } = useContext(CurrentUserContext);
 
+  function getKeywords() {
+    const keywordAmounts = {};
+    const keywords = [];
+
+    articles.forEach(({ keyword }) => {
+      const k = keyword.toLowerCase();
+      keywordAmounts[k] =
+        typeof keywordAmounts[k] === 'number' ? keywordAmounts[k] + 1 : 0;
+      if (!keywords.includes(k)) {
+        keywords.push(k);
+      }
+    });
+
+    keywords.sort(
+      (keyword) => keywordAmounts[keyword] - keywordAmounts[keyword],
+    );
+    return keywords;
+  }
+
+  function getKeywordsStatement(keywords) {
+    const getSpan = (k) => (
+      <span className="saved-news-header__keyword">{k}</span>
+    );
+    switch (keywords.length) {
+      case 1:
+        return getSpan(keywords[0]);
+      case 2:
+        return (
+          <>
+            {getSpan(keywords[0])} and {getSpan(keywords[1])}
+          </>
+        );
+      case 3:
+        return (
+          <>
+            {getSpan(keywords[0])}, {getSpan(keywords[1])}, and{' '}
+            {getSpan(keywords[2])}
+          </>
+        );
+      default:
+        return (
+          <>
+            {getSpan(keywords[0])}, {getSpan(keywords[1])}, and{' '}
+            {keywords.length - 2} others
+          </>
+        );
+    }
+  }
+
   return (
     <>
       <Navigation
-        onSigninLinkClick={() => {}}
         isUserLoggedIn={isUserLoggedIn}
         lightTheme
         onLogoutUser={onLogoutUser}
@@ -23,7 +71,7 @@ function SavedNewsHeader({ isUserLoggedIn, onLogoutUser, articles }) {
           <p className="saved-news-header__keywords">
             By keywords:{' '}
             <span className="saved-news-header__bold-text">
-              Nature, Yellowstone, and 2 other
+              {getKeywordsStatement(getKeywords())}
             </span>
           </p>
         ) : (

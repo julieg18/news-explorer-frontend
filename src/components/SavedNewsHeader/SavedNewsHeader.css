@@ -28,6 +28,10 @@
   margin: 0;
 }
 
+.saved-news-header__keyword {
+  text-transform: capitalize;
+}
+
 .saved-news-header__bold-text {
   font-weight: 600;
 }
