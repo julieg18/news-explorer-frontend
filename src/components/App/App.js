@@ -244,6 +244,7 @@ function App() {
               areCardsLoading={areCardsLoading}
               articles={articles}
               showSearchResultsError={showSearchResultsError}
+              onOpenSignupPopup={openSignupPopup}
               onSaveArticle={saveArticle}
               onDeleteArticle={deleteSavedArticle}
             />

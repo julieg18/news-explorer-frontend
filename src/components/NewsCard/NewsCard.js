@@ -7,10 +7,13 @@ function NewsCard({
   article: { _id, title, text, date, source, link, image, keyword, saved },
   onSaveArticle,
   onDeleteArticle,
+  onOpenSignupPopup,
 }) {
   function handleSaveBtnClick(e) {
     e.preventDefault();
-    if (!saved && isUserLoggedIn) {
+    if (!isUserLoggedIn) {
+      onOpenSignupPopup();
+    } else if (!saved) {
       onSaveArticle({
         title,
         text,
@@ -19,7 +22,7 @@ function NewsCard({
         link,
         image,
       });
-    } else if (saved && isUserLoggedIn) {
+    } else {
       onDeleteArticle(_id);
     }
   }

@@ -13,6 +13,7 @@ function Main({
   showSearchResultsError,
   onSaveArticle,
   onDeleteArticle,
+  onOpenSignupPopup,
 }) {
   const [displayedArticlesLength, setDisplayedArticlesLength] = useState(3);
 
@@ -86,6 +87,7 @@ function Main({
                 isUserLoggedIn={isUserLoggedIn}
                 onSaveArticle={onSaveArticle}
                 onDeleteArticle={onDeleteArticle}
+                onOpenSignupPopup={onOpenSignupPopup}
               />
               {displayedArticlesLength < articles.length ? (
                 <Button
