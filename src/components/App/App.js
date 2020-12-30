@@ -155,9 +155,14 @@ function App() {
   }
 
   function signupUser({ username: name, email, password }) {
-    return mainApi.signupUser({ name, email, password }).then(() => {
-      openRegistrationSuccessfulPopup();
-    });
+    return mainApi
+      .signupUser({ name, email, password })
+      .then(() => {
+        openRegistrationSuccessfulPopup();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function signinUser({ email, password }) {
@@ -167,8 +172,12 @@ function App() {
         localStorage.setItem('token', token);
         return getUser();
       })
-      .then(() => {
+      .then((savedArticlesArr) => {
+        setArticles(addUserInfoToArticles(articles, savedArticlesArr));
         closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -176,6 +185,7 @@ function App() {
     localStorage.removeItem('token');
     setIsUserLoggedIn(false);
     setCurrentUser({});
+    setArticles(addUserInfoToArticles(articles, []));
   }
 
   function saveArticle({ title, text, date, source, link, image }) {
