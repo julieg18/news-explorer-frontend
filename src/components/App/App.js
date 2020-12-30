@@ -69,11 +69,13 @@ function App() {
 
   function addUserInfoToArticles(articlesToBeUpdated, savedArticlesArr) {
     const updatedArticles = articlesToBeUpdated.map((article) => {
+      const foundSavedArticle = savedArticlesArr.find(
+        (savedArticle) => savedArticle.link === article.url,
+      );
       return {
         ...article,
-        saved: savedArticlesArr.some(
-          (savedArticle) => savedArticle.link === article.url,
-        ),
+        saved: Boolean(foundSavedArticle),
+        _id: foundSavedArticle ? foundSavedArticle._id : null,
       };
     });
     return updatedArticles;
@@ -233,6 +235,7 @@ function App() {
               articles={articles}
               showSearchResultsError={showSearchResultsError}
               onSaveArticle={saveArticle}
+              onDeleteArticle={deleteSavedArticle}
             />
           </Route>
           <ProtectedRoute

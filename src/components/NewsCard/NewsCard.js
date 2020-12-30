@@ -19,6 +19,8 @@ function NewsCard({
         link,
         image,
       });
+    } else if (saved && isUserLoggedIn) {
+      onDeleteArticle(_id);
     }
   }
 

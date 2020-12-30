@@ -12,6 +12,7 @@ function Main({
   areCardsLoading,
   showSearchResultsError,
   onSaveArticle,
+  onDeleteArticle,
 }) {
   const [displayedArticlesLength, setDisplayedArticlesLength] = useState(3);
 
@@ -26,6 +27,7 @@ function Main({
         url: link,
         urlToImage: image,
         saved,
+        _id,
       }) => ({
         title,
         url,
@@ -35,6 +37,7 @@ function Main({
         link,
         image,
         saved,
+        _id,
       }),
     );
   }
@@ -82,6 +85,7 @@ function Main({
                 )}
                 isUserLoggedIn={isUserLoggedIn}
                 onSaveArticle={onSaveArticle}
+                onDeleteArticle={onDeleteArticle}
               />
               {displayedArticlesLength < articles.length ? (
                 <Button
