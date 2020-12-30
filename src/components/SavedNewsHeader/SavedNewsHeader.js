@@ -19,9 +19,8 @@ function SavedNewsHeader({ isUserLoggedIn, onLogoutUser, articles }) {
       }
     });
 
-    keywords.sort(
-      (keyword) => keywordAmounts[keyword] - keywordAmounts[keyword],
-    );
+    keywords.sort((k1, k2) => keywordAmounts[k2] - keywordAmounts[k1]);
+
     return keywords;
   }
 
