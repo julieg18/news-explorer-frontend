@@ -81,7 +81,7 @@ class MainApi extends Api {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:8080/api',
+  baseUrl: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
