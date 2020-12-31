@@ -38,10 +38,10 @@ function App() {
           return getSavedArticles();
         })
         .then((savedArticlesArr) => {
-          // handleNewsSearch(
-          //   localStorage.getItem('articlesQuery'),
-          //   savedArticlesArr,
-          // );
+          handleNewsSearch(
+            localStorage.getItem('articlesQuery'),
+            savedArticlesArr,
+          );
           throw Error('dsfjlasfj;dlsk');
         })
         .catch((err) => {
