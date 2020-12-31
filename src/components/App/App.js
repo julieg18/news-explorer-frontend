@@ -38,13 +38,14 @@ function App() {
           return getSavedArticles();
         })
         .then((savedArticlesArr) => {
-          handleNewsSearch(
-            localStorage.getItem('articlesQuery'),
-            savedArticlesArr,
-          );
+          // handleNewsSearch(
+          //   localStorage.getItem('articlesQuery'),
+          //   savedArticlesArr,
+          // );
+          throw Error('dsfjlasfj;dlsk');
         })
         .catch((err) => {
-          console.log(err);
+          return err;
         });
     }
     if (
@@ -65,7 +66,7 @@ function App() {
         return getSavedArticles();
       })
       .catch((err) => {
-        console.log(err);
+        return err;
       });
   }
 
@@ -76,7 +77,6 @@ function App() {
         openRegistrationSuccessfulPopup();
       })
       .catch((err) => {
-        console.log(err);
         return Promise.reject(err);
       });
   }
@@ -93,7 +93,6 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
         return Promise.reject(err);
       });
   }
@@ -124,7 +123,7 @@ function App() {
         );
       })
       .catch((err) => {
-        console.log(err);
+        return err;
       });
   }
 
@@ -139,7 +138,7 @@ function App() {
         setArticles(addUserInfoToArticles(articles, newSavedArticles));
       })
       .catch((err) => {
-        console.log(err);
+        return err;
       });
   }
 
@@ -151,7 +150,7 @@ function App() {
         return articles;
       })
       .catch((err) => {
-        console.log(err);
+        return err;
       });
   }
 
@@ -185,7 +184,7 @@ function App() {
       .catch((err) => {
         setAreCardsLoading(false);
         setShowSearchResultsError(true);
-        console.log(err);
+        return err;
       });
   }
 
