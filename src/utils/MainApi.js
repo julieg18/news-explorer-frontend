@@ -81,7 +81,7 @@ class MainApi extends Api {
 }
 
 const mainApi = new MainApi({
-  baseUrl: '/api',
+  baseUrl: 'https://news-explorer-297322.uc.r.appspot.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
