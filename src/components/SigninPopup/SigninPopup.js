@@ -27,9 +27,14 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
   function handlePasswordInputChange(e) {
     const input = e.target;
     const isValid = input.validity.valid;
+    const message = input.validationMessage.includes(
+      'match the requested format',
+    )
+      ? 'Password must contain no spaces.'
+      : input.validationMessage;
     setPassword(e.target.value);
     setIsPasswordValid(isValid);
-    setPasswordValidationMessage(input.validationMessage);
+    setPasswordValidationMessage(message);
     setIsFormValid(isValid && isEmailValid && email !== '');
   }
 
@@ -96,6 +101,8 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
           }`}
           id="signin-password-field"
           required
+          pattern="^\S+$"
+          minLength="6"
           disabled={isLoading}
         />
         <span

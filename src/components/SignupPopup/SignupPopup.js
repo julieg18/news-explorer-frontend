@@ -38,9 +38,14 @@ function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
   function handlePasswordInputChange(e) {
     const input = e.target;
     const isValid = input.validity.valid;
+    const message = input.validationMessage.includes(
+      'match the requested format',
+    )
+      ? 'Password must contain no spaces.'
+      : input.validationMessage;
     setPassword(e.target.value);
     setIsPasswordValid(isValid);
-    setPasswordValidationMessage(input.validationMessage);
+    setPasswordValidationMessage(message);
     setIsFormValid(
       isValid &&
         isEmailValid &&
@@ -133,6 +138,8 @@ function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
           }`}
           id="signup-password-field"
           required
+          pattern="^\S+$"
+          minLength="6"
         />
         <span
           className={`popup-form__field-error ${
