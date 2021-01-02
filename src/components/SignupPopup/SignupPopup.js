@@ -94,6 +94,7 @@ function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
           Email
         </label>
         <input
+          disabled={isLoading}
           onChange={handleEmailInputChange}
           value={email}
           placeholder="Enter email"
@@ -121,6 +122,7 @@ function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
           Password
         </label>
         <input
+          disabled={isLoading}
           onChange={handlePasswordInputChange}
           value={password}
           placeholder="Enter password"
@@ -149,6 +151,7 @@ function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
           Username
         </label>
         <input
+          disabled={isLoading}
           onChange={handleUsernameInputChange}
           value={username}
           placeholder="Enter username"

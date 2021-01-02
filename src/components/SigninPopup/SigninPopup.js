@@ -61,6 +61,7 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
           Email
         </label>
         <input
+          disabled={isLoading}
           onChange={handleEmailInputChange}
           value={email}
           placeholder="Enter email"
@@ -95,6 +96,7 @@ function SigninPopup({ visible, onClose, onSignupLinkClick, onSigninUser }) {
           }`}
           id="signin-password-field"
           required
+          disabled={isLoading}
         />
         <span
           className={`popup-form__field-error ${
