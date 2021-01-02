@@ -3,6 +3,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
 import Button from '../Button/Button';
 import Preloader from '../Preloader/Preloader';
+import { displayedCardsAmount } from '../../utils/config';
 import './Main.css';
 
 function Main({
@@ -15,7 +16,9 @@ function Main({
   onDeleteArticle,
   onOpenSignupPopup,
 }) {
-  const [displayedArticlesLength, setDisplayedArticlesLength] = useState(3);
+  const [displayedArticlesLength, setDisplayedArticlesLength] = useState(
+    displayedCardsAmount,
+  );
 
   function getDisplayedArticles(articlesToBeDisplayed) {
     return articlesToBeDisplayed.map(
@@ -44,7 +47,7 @@ function Main({
   }
 
   function increaseDisplayedArticles() {
-    setDisplayedArticlesLength(displayedArticlesLength + 3);
+    setDisplayedArticlesLength(displayedArticlesLength + displayedCardsAmount);
   }
 
   return (

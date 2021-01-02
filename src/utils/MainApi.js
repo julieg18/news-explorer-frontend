@@ -1,4 +1,5 @@
 import Api from './Api';
+import { mainApiBaseUrl } from './config';
 
 class MainApi extends Api {
   _setupError(err) {
@@ -81,7 +82,7 @@ class MainApi extends Api {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://news-explorer-297322.uc.r.appspot.com/api',
+  baseUrl: mainApiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },

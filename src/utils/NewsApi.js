@@ -1,10 +1,15 @@
 import Api from './Api';
+import {
+  newsApiAuthorizationKey,
+  newsApiBaseUrl,
+  newsSearchDays,
+} from './config';
 
 class NewsApi extends Api {
   getArticles(query) {
     const currentDate = new Date();
     const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 7);
+    pastDate.setDate(pastDate.getDate() - newsSearchDays);
 
     return fetch(
       `${
@@ -15,8 +20,7 @@ class NewsApi extends Api {
 }
 
 const newsApi = new NewsApi({
-  baseUrl:
-    'https://nomoreparties.co/news/v2/everything?language=en&apiKey=7a87f53207154e3698b4738295e2f3a0',
+  baseUrl: `${newsApiBaseUrl}&apiKey=${newsApiAuthorizationKey}`,
 });
 
 export default newsApi;
