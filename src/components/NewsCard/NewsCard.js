@@ -4,10 +4,32 @@ import './NewsCard.css';
 function NewsCard({
   isCardInMain,
   isUserLoggedIn,
-  card: { title, text, date, source, link, image, keyword, saved },
+  article: { _id, title, text, date, source, link, image, keyword, saved },
+  onSaveArticle,
+  onDeleteArticle,
+  onOpenSignupPopup,
 }) {
-  function handleBtnClick(e) {
+  function handleSaveBtnClick(e) {
     e.preventDefault();
+    if (!isUserLoggedIn) {
+      onOpenSignupPopup();
+    } else if (!saved) {
+      onSaveArticle({
+        title,
+        text,
+        date: new Date(date),
+        source,
+        link,
+        image,
+      });
+    } else {
+      onDeleteArticle(_id);
+    }
+  }
+
+  function handleDeleteBtnClick(e) {
+    e.preventDefault();
+    onDeleteArticle(_id);
   }
 
   return (
@@ -16,7 +38,7 @@ function NewsCard({
       {isCardInMain ? (
         <>
           <button
-            onClick={handleBtnClick}
+            onClick={handleSaveBtnClick}
             className={`news-card__btn news-card__btn_icon_${
               saved ? 'blue-' : ''
             }bookmark`}
@@ -33,13 +55,15 @@ function NewsCard({
         <>
           <span className="news-card__keyword">{keyword}</span>
           <button
-            onClick={handleBtnClick}
+            onClick={handleDeleteBtnClick}
             className="news-card__btn news-card__btn_icon_trash"
           ></button>
           <span className="news-card__btn-tooltip">Remove from saved</span>
         </>
       )}
-      <p className="news-card__date">{date}</p>
+      <p className="news-card__date">
+        {new Date(date).toLocaleDateString('en-US', { dateStyle: 'long' })}
+      </p>
       <h3 className="news-card__title">{title}</h3>
       <p className="news-card__text">{text}</p>
       <p className="news-card__source">{source}</p>

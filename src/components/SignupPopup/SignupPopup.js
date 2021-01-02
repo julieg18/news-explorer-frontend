@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Button from '../Button/Button';
 
-function SignupPopup({ visible, onClose, onSigninLinkClick }) {
+function SignupPopup({ visible, onClose, onSigninLinkClick, onSignupUser }) {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailValidationMessage, setEmailValidationMessage] = useState('');
@@ -17,7 +17,8 @@ function SignupPopup({ visible, onClose, onSigninLinkClick }) {
     '',
   );
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleEmailInputChange(e) {
     const input = e.target;
@@ -66,6 +67,17 @@ function SignupPopup({ visible, onClose, onSigninLinkClick }) {
 
   function handleFormSubmit(e) {
     e.preventDefault();
+
+    setIsLoading(true);
+    onSignupUser({ email, password, username })
+      .then(() => {
+        setIsLoading(false);
+        setFormError('');
+      })
+      .catch((err) => {
+        setFormError(err.message);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -158,9 +170,13 @@ function SignupPopup({ visible, onClose, onSigninLinkClick }) {
           {usernameValidationMessage}
         </span>
       </div>
+      <span title={formError} className="popup-form__form-error">
+        {formError}
+      </span>
       <Button
         disabled={!isFormValid}
         additionalClasses="popup-form__submit-btn"
+        type="submit"
       >
         {isLoading ? 'Loading...' : 'Sign up'}
       </Button>

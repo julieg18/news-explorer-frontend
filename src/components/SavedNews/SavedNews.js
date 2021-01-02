@@ -3,13 +3,30 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import './SavedNews.css';
 
-function SavedNews({ isUserLoggedIn, cards }) {
+function SavedNews({
+  isUserLoggedIn,
+  articles,
+  onLogoutUser,
+  onDeleteArticle,
+}) {
   return (
     <>
-      <SavedNewsHeader isUserLoggedIn={isUserLoggedIn} />
-      <section className="saved-news">
-        <NewsCardList isUserLoggedIn={isUserLoggedIn} cards={cards} />
-      </section>
+      <SavedNewsHeader
+        isUserLoggedIn={isUserLoggedIn}
+        onLogoutUser={onLogoutUser}
+        articles={articles}
+      />
+      {articles.length > 0 ? (
+        <section className="saved-news">
+          <NewsCardList
+            onDeleteArticle={onDeleteArticle}
+            isUserLoggedIn={isUserLoggedIn}
+            articles={articles}
+          />
+        </section>
+      ) : (
+        ''
+      )}
     </>
   );
 }

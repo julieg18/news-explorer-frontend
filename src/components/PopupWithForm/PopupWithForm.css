@@ -1,6 +1,6 @@
 .popup-form__submit-btn {
   width: 100%;
-  margin: 24px 0 0;
+  margin: 8px 0 0;
 }
 
 .popup-form__field {
@@ -64,4 +64,19 @@
   color: #ff0000;
   font-size: 12px;
   line-height: 15px;
+}
+
+.popup-form__form-error {
+  margin: 2px 0 0;
+  font-family: Inter, sans-serif;
+  color: #ff0000;
+  font-weight: normal;
+  font-size: 12px;
+  height: 15px;
+  display: block;
+  line-height: 15px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

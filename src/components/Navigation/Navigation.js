@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Overlay from '../Overlay/Overlay';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './Navigation.css';
 
 function Navigation({
   isUserLoggedIn,
   lightTheme,
   isPopupOpen,
+  onLogoutUser,
   onSigninLinkClick,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { name } = useContext(CurrentUserContext);
 
   function toggleDropDown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -57,8 +60,8 @@ function Navigation({
                   </Link>
                 </li>
                 <li className="navigation__item">
-                  <button className="navigation__btn">
-                    Elise <span className="navigation__btn-icon"></span>
+                  <button onClick={onLogoutUser} className="navigation__btn">
+                    {name} <span className="navigation__btn-icon"></span>
                   </button>
                 </li>
               </>
@@ -98,8 +101,8 @@ function Navigation({
               </NavLink>
             </li>
             <li className="navigation__item">
-              <button className="navigation__btn">
-                Elise <span className="navigation__btn-icon"></span>
+              <button onClick={onLogoutUser} className="navigation__btn">
+                {name} <span className="navigation__btn-icon"></span>
               </button>
             </li>
           </>
