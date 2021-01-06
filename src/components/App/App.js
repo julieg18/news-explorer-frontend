@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -28,6 +28,7 @@ function App() {
   const [showSearchResultsError, setShowSearchResultsError] = useState(false);
   const [articles, setArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
+  const location = useLocation();
   /* eslint-disable-next-line */
   const useMountEffect = (func) => useEffect(func, []);
 
@@ -55,6 +56,13 @@ function App() {
       handleNewsSearch(localStorage.getItem('articlesQuery'));
     }
   });
+
+  useEffect(() => {
+    if (location.pathname === '/signin') {
+      openSigninPopup();
+    }
+    /* eslint-disable-next-line */
+  }, [location]);
 
   function getUser() {
     const token = localStorage.getItem('token');
@@ -231,7 +239,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Switch>
-          <Route exact path="/">
+          <Route exact path={['/', '/signin']}>
             <Header
               onLogoutUser={logoutUser}
               onSigninLinkClick={openSignupPopup}

@@ -83,6 +83,9 @@ function Navigation({
           <NavLink
             exact
             to="/"
+            isActive={(match, { pathname }) => {
+              return pathname === '/' || pathname === '/signin';
+            }}
             className="navigation__link"
             activeClassName="navigation__link_selected"
           >
