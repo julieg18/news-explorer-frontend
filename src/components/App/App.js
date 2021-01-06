@@ -43,7 +43,6 @@ function App() {
             localStorage.getItem('articlesQuery'),
             savedArticlesArr,
           );
-          throw Error('dsfjlasfj;dlsk');
         })
         .catch((err) => {
           return err;
